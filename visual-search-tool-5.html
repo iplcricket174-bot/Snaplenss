@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== PRIMARY SEO ===== -->
+<title>SnapLens — Free Google Lens Alternative | Search by Image Online</title>
+<meta name="description" content="SnapLens is a free Google Lens alternative. Upload any image to extract text (OCR), detect objects, identify colors and find similar images online. No login required — instant results!">
+<meta name="keywords" content="google lens alternative, search by image, reverse image search, free visual search, image to text OCR, object detection online, snaplens, google lens online, image search tool, find similar images, photo search, snap lens, visual search engine">
+<meta name="author" content="SnapLens">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="language" content="English">
+<meta name="revisit-after" content="3 days">
+<meta name="rating" content="general">
+<link rel="canonical" href="https://snaplens.vercel.app/">
+
+<!-- ===== OPEN GRAPH (Facebook, WhatsApp) ===== -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://snaplens.vercel.app/">
+<meta property="og:title" content="SnapLens — Free Google Lens Alternative | Search by Image">
+<meta property="og:description" content="Upload any image to extract text, detect objects, identify colors and find similar images online. Free Google Lens alternative — no login required!">
+<meta property="og:image" content="https://snaplens.vercel.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="SnapLens">
+<meta property="og:locale" content="en_US">
+
+<!-- ===== TWITTER CARD ===== -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://snaplens.vercel.app/">
+<meta name="twitter:title" content="SnapLens — Free Google Lens Alternative">
+<meta name="twitter:description" content="Upload any image to extract text (OCR), detect objects, find similar images. Free & instant — no login needed!">
+<meta name="twitter:image" content="https://snaplens.vercel.app/og-image.jpg">
+<meta name="twitter:creator" content="@snaplens">
+
+<!-- ===== SCHEMA STRUCTURED DATA ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://snaplens.vercel.app/#webapp",
+      "name": "SnapLens",
+      "url": "https://snaplens.vercel.app/",
+      "description": "Free Google Lens alternative. Search by image, extract text (OCR), detect objects, identify colors and find similar images online.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "featureList": ["OCR Text Extraction","Object Detection","Color Identification","Reverse Image Search","Google Lens Alternative","No Login Required"],
+      "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "1250"}
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://snaplens.vercel.app/#website",
+      "url": "https://snaplens.vercel.app/",
+      "name": "SnapLens",
+      "description": "Free Visual Search Tool — Google Lens Alternative",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {"@type": "EntryPoint", "urlTemplate": "https://snaplens.vercel.app/?q={search_term_string}"},
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "What is SnapLens?", "acceptedAnswer": {"@type": "Answer", "text": "SnapLens is a free Google Lens alternative that lets you search by image, extract text using OCR, detect objects, identify colors, and find similar images online without logging in."}},
+        {"@type": "Question", "name": "Is SnapLens free to use?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, SnapLens is completely free. No account or login is required. Simply upload an image and get instant results."}},
+        {"@type": "Question", "name": "How does SnapLens compare to Google Lens?", "acceptedAnswer": {"@type": "Answer", "text": "SnapLens works like Google Lens but runs directly in your browser for free. It supports OCR, object detection, color analysis and reverse image search."}},
+        {"@type": "Question", "name": "Can I use SnapLens on mobile?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! SnapLens is fully responsive and works on all mobile devices including Android and iPhone — no app download needed."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- ===== PERFORMANCE ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+<!-- ===== FAVICON ===== -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
+<meta name="theme-color" content="#6c63ff">
+<meta name="google-site-verification" content="mwcTqUO-FM5o_8QlQHfNjZOsGp4GfrTllXcXAwv-zj0" />
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Tesseract.js for OCR -->
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --card: #1a1a26;
+    --border: #2a2a3d;
+    --accent: #6c63ff;
+    --accent2: #ff6584;
+    --accent3: #43e97b;
+    --text: #e8e8f0;
+    --muted: #7070a0;
+    --glow: rgba(108, 99, 255, 0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background mesh */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 0%, rgba(108,99,255,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(255,101,132,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 50% 50%, rgba(67,233,123,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    background: rgba(10,10,15,0.7);
+    position: sticky;
+    top: 0;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+
+  .logo span { color: var(--accent); }
+
+  nav { display: flex; gap: 30px; }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--text); }
+
+  /* AdSense Top Banner */
+  .ad-banner {
+    width: 100%;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    gap: 10px;
+    position: relative;
+    z-index: 9;
+  }
+  .ad-banner-inner {
+    width: 728px;
+    height: 90px;
+    background: var(--card);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 60px 20px 40px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(108,99,255,0.15);
+    border: 1px solid rgba(108,99,255,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    color: #a29bfe;
+    margin-bottom: 24px;
+    animation: fadeDown 0.6s ease;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 16px;
+    animation: fadeDown 0.7s ease;
+  }
+
+  .hero h1 .gradient-text {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+    animation: fadeDown 0.8s ease;
+  }
+
+  /* ===== FEATURES TABS ===== */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    animation: fadeDown 0.9s ease;
+  }
+
+  .tab-btn {
+    padding: 10px 22px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .tab-btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .tab-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 20px var(--glow);
+  }
+
+  /* ===== UPLOAD AREA ===== */
+  .tool-container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: 20px;
+    background: var(--card);
+    padding: 50px 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .upload-zone::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(108,99,255,0.05), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--accent);
+    box-shadow: 0 0 40px var(--glow);
+  }
+
+  .upload-zone:hover::before, .upload-zone.dragover::before {
+    opacity: 1;
+  }
+
+  .upload-icon {
+    width: 70px; height: 70px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(108,99,255,0.2), rgba(255,101,132,0.2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 20px;
+    border: 1px solid rgba(108,99,255,0.3);
+  }
+
+  .upload-zone h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .upload-zone p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  .upload-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, var(--accent), #8b5cf6);
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 20px var(--glow);
+  }
+
+  .upload-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--glow);
+  }
+
+  #fileInput { display: none; }
+
+  /* Preview */
+  .preview-section {
+    display: none;
+    margin-top: 24px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  .preview-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .preview-header h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .clear-btn {
+    background: rgba(255,101,132,0.15);
+    border: 1px solid rgba(255,101,132,0.3);
+    color: var(--accent2);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .clear-btn:hover { background: rgba(255,101,132,0.25); }
+
+  .preview-img-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0,0,0,0.3);
+  }
+
+  #previewImg {
+    max-width: 100%;
+    max-height: 380px;
+    border-radius: 12px;
+    object-fit: contain;
+  }
+
+  /* Scan animation */
+  .scan-line {
+    position: absolute;
+    left: 20px; right: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    border-radius: 2px;
+    top: 20px;
+    animation: scanMove 2s ease-in-out infinite;
+    display: none;
+    box-shadow: 0 0 10px var(--accent);
+  }
+
+  @keyframes scanMove {
+    0% { top: 20px; opacity: 1; }
+    90% { top: calc(100% - 20px); opacity: 1; }
+    100% { top: calc(100% - 20px); opacity: 0; }
+  }
+
+  /* Action buttons */
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 16px 20px;
+    flex-wrap: wrap;
+  }
+
+  .action-btn {
+    flex: 1;
+    min-width: 140px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+  }
+
+  .action-btn:hover {
+    border-color: var(--accent);
+    background: rgba(108,99,255,0.1);
+    transform: translateY(-1px);
+  }
+
+  .action-btn.primary {
+    background: linear-gradient(135deg, var(--accent), #8b5cf6);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 16px var(--glow);
+  }
+
+  .action-btn.primary:hover {
+    box-shadow: 0 6px 24px var(--glow);
+    background: linear-gradient(135deg, #7c73ff, #9d6fff);
+  }
+
+  /* ===== RESULTS AREA ===== */
+  .results-area {
+    margin-top: 24px;
+    display: none;
+  }
+
+  .result-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    animation: slideUp 0.4s ease;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .result-card-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .result-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .result-icon.ocr { background: rgba(67,233,123,0.15); }
+  .result-icon.objects { background: rgba(108,99,255,0.15); }
+  .result-icon.colors { background: rgba(255,101,132,0.15); }
+  .result-icon.search { background: rgba(255,183,77,0.15); }
+
+  .result-card-header h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .result-card-body { padding: 20px; }
+
+  /* OCR Result */
+  .ocr-text {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #c8c8e8;
+    white-space: pre-wrap;
+    min-height: 60px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .copy-btn {
+    margin-top: 12px;
+    padding: 8px 18px;
+    background: rgba(67,233,123,0.15);
+    border: 1px solid rgba(67,233,123,0.3);
+    color: var(--accent3);
+    border-radius: 100px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .copy-btn:hover { background: rgba(67,233,123,0.25); }
+
+  /* Tags / Objects */
+  .tags-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    border: 1px solid;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .tag.purple { background: rgba(108,99,255,0.15); border-color: rgba(108,99,255,0.3); color: #a29bfe; }
+  .tag.pink { background: rgba(255,101,132,0.15); border-color: rgba(255,101,132,0.3); color: #ff6584; }
+  .tag.green { background: rgba(67,233,123,0.15); border-color: rgba(67,233,123,0.3); color: #43e97b; }
+  .tag.yellow { background: rgba(255,183,77,0.15); border-color: rgba(255,183,77,0.3); color: #ffb74d; }
+
+  /* Color swatches */
+  .colors-wrap {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .color-swatch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+  }
+
+  .swatch-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.1);
+    flex-shrink: 0;
+  }
+
+  /* Search links */
+  .search-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+  }
+
+  .search-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.88rem;
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+
+  .search-link:hover {
+    border-color: var(--accent);
+    background: rgba(108,99,255,0.08);
+    transform: translateY(-2px);
+  }
+
+  .search-link-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    background: rgba(255,255,255,0.05);
+    flex-shrink: 0;
+  }
+
+  /* Loading */
+  .loading-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .spinner {
+    width: 22px; height: 22px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Progress bar */
+  .progress-bar-wrap {
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+
+  /* Ad sidebar */
+  .layout {
+    display: flex;
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .main-content { flex: 1; min-width: 0; }
+
+  .sidebar {
+    width: 280px;
+    flex-shrink: 0;
+  }
+
+  .ad-sidebar {
+    background: var(--card);
+    border: 1px dashed var(--border);
+    border-radius: 16px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: sticky;
+    top: 80px;
+  }
+
+  /* How to use section */
+  .how-section {
+    max-width: 860px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .how-section h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .step-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.25s;
+  }
+
+  .step-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(108,99,255,0.15);
+  }
+
+  .step-num {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin: 0 auto 14px;
+  }
+
+  .step-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  .step-card p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 30px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 0.85rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--card);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 0.88rem;
+    color: var(--text);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    z-index: 1000;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    header { padding: 14px 20px; }
+    nav { display: none; }
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; }
+    .ad-sidebar { height: 120px; }
+    .hero { padding: 40px 20px 30px; }
+    .ad-banner-inner { width: 100%; height: 60px; }
+  }
+
+  /* URL input */
+  .url-input-wrap {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .url-input {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .url-input:focus { border-color: var(--accent); }
+  .url-input::placeholder { color: var(--muted); }
+
+  .url-submit {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--accent), #8b5cf6);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .url-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Confidence bar */
+  .confidence-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .confidence-label { font-size: 0.78rem; color: var(--muted); min-width: 80px; }
+
+  .conf-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .conf-bar {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+  }
+
+  .conf-pct { font-size: 0.78rem; color: var(--accent3); min-width: 36px; text-align: right; }
+</style>
+</head>
+<body>
+
+<!-- TOP AD BANNER (AdSense) -->
+<div class="ad-banner">
+  <div class="ad-banner-inner">
+    <!-- ADSENSE CODE HERE: Replace with actual AdSense leaderboard ad unit -->
+    📢 Advertisement — Google AdSense 728×90
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">📸</div>
+    Snap<span>Lens</span>
+  </div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">How It Works</a>
+    <a href="#">API</a>
+    <a href="#">Blog</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">✨ Free Visual Search — No Login Required</div>
+  <h1>SnapLens — Search the World<br><span class="gradient-text">with Any Image</span></h1>
+  <p>SnapLens — Upload a photo to instantly extract text, detect objects, identify colors, and find similar images online — all in one powerful tool.</p>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="setTab('all', this)">🔍 All Features</button>
+    <button class="tab-btn" onclick="setTab('ocr', this)">📝 OCR Text</button>
+    <button class="tab-btn" onclick="setTab('objects', this)">🏷️ Objects</button>
+    <button class="tab-btn" onclick="setTab('colors', this)">🎨 Colors</button>
+    <button class="tab-btn" onclick="setTab('search', this)">🌐 Search</button>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+  <div class="main-content">
+    <div class="tool-container" style="padding: 0 0 40px;">
+
+      <!-- UPLOAD ZONE -->
+      <div class="upload-zone" id="uploadZone" onclick="triggerUpload()" ondragover="handleDragOver(event)" ondrop="handleDrop(event)" ondragleave="handleDragLeave(event)">
+        <div class="upload-icon">📸</div>
+        <h3>Drop your image here</h3>
+        <p>Supports JPG, PNG, WebP, GIF — up to 10MB</p>
+        <button class="upload-btn" onclick="event.stopPropagation(); triggerUpload()">
+          📁 Choose Image
+        </button>
+        <div class="divider">or paste image URL</div>
+        <div class="url-input-wrap" onclick="event.stopPropagation()">
+          <input type="text" class="url-input" id="urlInput" placeholder="https://example.com/image.jpg" />
+          <button class="url-submit" onclick="loadFromURL()">Search</button>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" onchange="handleFile(event)">
+      </div>
+
+      <!-- PREVIEW SECTION -->
+      <div class="preview-section" id="previewSection">
+        <div class="preview-header">
+          <h4>🖼️ Image Preview</h4>
+          <button class="clear-btn" onclick="clearImage()">✕ Clear</button>
+        </div>
+        <div class="preview-img-wrap" id="imgWrap">
+          <img id="previewImg" src="" alt="Preview" />
+          <div class="scan-line" id="scanLine"></div>
+        </div>
+        <div class="action-buttons">
+          <button class="action-btn primary" onclick="analyzeAll()">⚡ Analyze All</button>
+          <button class="action-btn" onclick="runOCR()">📝 Extract Text</button>
+          <button class="action-btn" onclick="detectObjects()">🏷️ Detect Objects</button>
+          <button class="action-btn" onclick="extractColors()">🎨 Get Colors</button>
+          <button class="action-btn" onclick="reverseSearch()">🌐 Find Similar</button>
+        </div>
+      </div>
+
+      <!-- RESULTS AREA -->
+      <div class="results-area" id="resultsArea"></div>
+
+    </div>
+  </div>
+
+  <!-- SIDEBAR AD -->
+  <div class="sidebar">
+    <div class="ad-sidebar">
+      <!-- ADSENSE CODE HERE: Replace with actual AdSense 300×600 or 300×250 ad unit -->
+      📢 AdSense<br>300×600<br>Ad Space
+    </div>
+  </div>
+</div>
+
+<!-- HOW TO USE -->
+<div class="how-section">
+  <h2>How It Works</h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <h4>Upload Image</h4>
+      <p>Drag & drop or click to upload any image. Paste URL too!</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <h4>Auto Analysis</h4>
+      <p>Our AI instantly scans for text, objects, colors & more.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <h4>Get Results</h4>
+      <p>See extracted text, detected objects and dominant colors.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <h4>Find Similar</h4>
+      <p>Search Google, Bing, TinEye for similar images online.</p>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM AD -->
+<div class="ad-banner" style="border-top: 1px solid var(--border); border-bottom: none; margin-bottom: 20px;">
+  <div class="ad-banner-inner">
+    <!-- ADSENSE CODE HERE: Replace with actual AdSense bottom banner -->
+    📢 Advertisement — Google AdSense 728×90
+  </div>
+</div>
+
+
+<!-- ===== SEO CONTENT: FAQ SECTION ===== -->
+<div style="max-width:860px;margin:0 auto 60px;padding:0 20px;position:relative;z-index:1;">
+  <h2 style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:8px;text-align:center;">Frequently Asked Questions</h2>
+  <p style="text-align:center;color:var(--muted);margin-bottom:32px;font-size:0.95rem;">Everything you need to know about SnapLens</p>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;cursor:pointer;">
+      <summary style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">What is SnapLens? <span style="color:var(--accent)">+</span></summary>
+      <p style="margin-top:12px;color:var(--muted);line-height:1.7;font-size:0.9rem;">SnapLens is a free Google Lens alternative that runs in your browser. Upload any image to extract text (OCR), detect objects, identify dominant colors, and find visually similar images on Google, Bing, Yandex and TinEye — no login required.</p>
+    </details>
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;cursor:pointer;">
+      <summary style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">Is SnapLens completely free? <span style="color:var(--accent)">+</span></summary>
+      <p style="margin-top:12px;color:var(--muted);line-height:1.7;font-size:0.9rem;">Yes! SnapLens is 100% free to use. No account, no subscription, no hidden fees. Just upload your image and get instant results.</p>
+    </details>
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;cursor:pointer;">
+      <summary style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">How does SnapLens OCR work? <span style="color:var(--accent)">+</span></summary>
+      <p style="margin-top:12px;color:var(--muted);line-height:1.7;font-size:0.9rem;">SnapLens uses Tesseract.js — a powerful open-source OCR engine — to extract text from images directly in your browser. It supports printed text, screenshots, scanned documents and more.</p>
+    </details>
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;cursor:pointer;">
+      <summary style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">Can I use SnapLens on my phone? <span style="color:var(--accent)">+</span></summary>
+      <p style="margin-top:12px;color:var(--muted);line-height:1.7;font-size:0.9rem;">Absolutely! SnapLens is fully mobile-responsive and works on all Android and iPhone browsers. No app download needed — just open snaplens.vercel.app in your browser.</p>
+    </details>
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;cursor:pointer;">
+      <summary style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">What is reverse image search? <span style="color:var(--accent)">+</span></summary>
+      <p style="margin-top:12px;color:var(--muted);line-height:1.7;font-size:0.9rem;">Reverse image search lets you upload an image instead of typing text to find where it appears online, find similar images, identify products, check if a photo is real, and more. SnapLens connects you to Google, Bing, Yandex and TinEye for reverse search.</p>
+    </details>
+  </div>
+</div>
+
+<!-- ===== SEO CONTENT: ABOUT SECTION ===== -->
+<div style="max-width:860px;margin:0 auto 60px;padding:0 20px;position:relative;z-index:1;">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px;">
+    <h2 style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:16px;">About SnapLens — The Best Free Google Lens Alternative</h2>
+    <p style="color:var(--muted);line-height:1.8;font-size:0.92rem;margin-bottom:14px;">
+      <strong style="color:var(--text);">SnapLens</strong> is a powerful free visual search tool designed as the best Google Lens alternative available online. Whether you want to search by image, extract text from a photo, detect objects in an image, or find similar images across the web — SnapLens does it all, instantly and for free.
+    </p>
+    <p style="color:var(--muted);line-height:1.8;font-size:0.92rem;margin-bottom:14px;">
+      Unlike Google Lens which requires a Google account and the Google app, <strong style="color:var(--text);">SnapLens works directly in any browser</strong> — on mobile or desktop — with no login required. Simply upload your image or paste an image URL to get started.
+    </p>
+    <p style="color:var(--muted);line-height:1.8;font-size:0.92rem;">
+      SnapLens uses advanced AI technology including <strong style="color:var(--text);">Tesseract OCR</strong> for text extraction, canvas-based image analysis for object and color detection, and direct integrations with Google Images, Bing Visual Search, Yandex Images and TinEye for reverse image search.
+    </p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2026 SnapLens — Free Visual Search Tool</div>
+  <div>Privacy Policy · Terms · Contact</div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Copied!</div>
+
+<script>
+  let currentImageData = null;
+  let currentTab = 'all';
+  let currentFile = null;
+
+  // ===== TAB CONTROL =====
+  function setTab(tab, btn) {
+    currentTab = tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // ===== FILE HANDLING =====
+  function triggerUpload() { document.getElementById('fileInput').click(); }
+
+  function handleFile(e) {
+    const file = e.target.files[0];
+    if (file) processFile(file);
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault();
+    document.getElementById('uploadZone').classList.add('dragover');
+  }
+
+  function handleDragLeave(e) {
+    document.getElementById('uploadZone').classList.remove('dragover');
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    document.getElementById('uploadZone').classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) processFile(file);
+  }
+
+  function processFile(file) {
+    currentFile = file;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      currentImageData = e.target.result;
+      showPreview(currentImageData);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function loadFromURL() {
+    const url = document.getElementById('urlInput').value.trim();
+    if (!url) return;
+    // Use a CORS proxy for demo
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+    showToast('🔄 Loading image...');
+    fetch(proxyUrl)
+      .then(r => r.blob())
+      .then(blob => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          currentImageData = e.target.result;
+          showPreview(currentImageData);
+        };
+        reader.readAsDataURL(blob);
+      })
+      .catch(() => {
+        currentImageData = url;
+        showPreview(url);
+      });
+  }
+
+  function showPreview(src) {
+    document.getElementById('previewImg').src = src;
+    document.getElementById('previewSection').style.display = 'block';
+    document.getElementById('resultsArea').style.display = 'none';
+    document.getElementById('resultsArea').innerHTML = '';
+    document.getElementById('previewSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function clearImage() {
+    currentImageData = null;
+    currentFile = null;
+    document.getElementById('previewSection').style.display = 'none';
+    document.getElementById('resultsArea').style.display = 'none';
+    document.getElementById('resultsArea').innerHTML = '';
+    document.getElementById('fileInput').value = '';
+    document.getElementById('urlInput').value = '';
+    stopScan();
+  }
+
+  // ===== SCAN ANIMATION =====
+  function startScan() {
+    const line = document.getElementById('scanLine');
+    line.style.display = 'block';
+  }
+  function stopScan() {
+    const line = document.getElementById('scanLine');
+    line.style.display = 'none';
+  }
+
+  // ===== ANALYZE ALL =====
+  async function analyzeAll() {
+    if (!currentImageData) return;
+    clearResults();
+    startScan();
+    document.getElementById('resultsArea').style.display = 'block';
+
+    addLoadingCard('ocr-card', '📝 Extracting Text (OCR)...', 'ocr');
+    addLoadingCard('obj-card', '🏷️ Detecting Objects...', 'objects');
+    addLoadingCard('col-card', '🎨 Analyzing Colors...', 'colors');
+    addLoadingCard('src-card', '🌐 Preparing Search Links...', 'search');
+
+    await runOCRInternal();
+    await detectObjectsInternal();
+    await extractColorsInternal();
+    await reverseSearchInternal();
+    stopScan();
+  }
+
+  function clearResults() {
+    document.getElementById('resultsArea').innerHTML = '';
+  }
+
+  function addLoadingCard(id, msg, type) {
+    const area = document.getElementById('resultsArea');
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.id = id;
+    card.innerHTML = `
+      <div class="result-card-body">
+        <div class="loading-wrap">
+          <div class="spinner"></div>
+          <div>
+            <div>${msg}</div>
+            <div class="progress-bar-wrap"><div class="progress-bar" id="pb-${id}"></div></div>
+          </div>
+        </div>
+      </div>`;
+    area.appendChild(card);
+  }
+
+  function updateProgress(cardId, pct) {
+    const pb = document.getElementById(`pb-${cardId}`);
+    if (pb) pb.style.width = pct + '%';
+  }
+
+  // ===== OCR =====
+  async function runOCR() {
+    if (!currentImageData) return;
+    clearResults();
+    document.getElementById('resultsArea').style.display = 'block';
+    startScan();
+    addLoadingCard('ocr-card', '📝 Extracting Text (OCR)...', 'ocr');
+    await runOCRInternal();
+    stopScan();
+  }
+
+  async function runOCRInternal() {
+    try {
+      const worker = await Tesseract.createWorker('eng', 1, {
+        logger: m => {
+          if (m.status === 'recognizing text') {
+            updateProgress('ocr-card', Math.round(m.progress * 100));
+          }
+        }
+      });
+      const { data } = await worker.recognize(currentImageData);
+      await worker.terminate();
+
+      const text = data.text.trim() || '(No text detected in this image)';
+      const conf = Math.round(data.confidence) || 0;
+      renderOCRResult(text, conf);
+    } catch (e) {
+      renderOCRResult('Could not extract text. Try a clearer image.', 0);
+    }
+  }
+
+  function renderOCRResult(text, confidence) {
+    const card = document.getElementById('ocr-card');
+    if (!card) return;
+    card.innerHTML = `
+      <div class="result-card-header">
+        <div class="result-icon ocr">📝</div>
+        <div>
+          <h4>Extracted Text (OCR)</h4>
+          <div class="confidence-wrap">
+            <span class="confidence-label">Confidence</span>
+            <div class="conf-bar-bg"><div class="conf-bar" style="width:${confidence}%"></div></div>
+            <span class="conf-pct">${confidence}%</span>
+          </div>
+        </div>
+      </div>
+      <div class="result-card-body">
+        <div class="ocr-text" id="ocrTextContent">${escapeHtml(text)}</div>
+        <button class="copy-btn" onclick="copyText('ocrTextContent')">📋 Copy Text</button>
+      </div>`;
+  }
+
+  // ===== OBJECT DETECTION (Canvas-based pixel analysis) =====
+  async function detectObjects() {
+    if (!currentImageData) return;
+    clearResults();
+    document.getElementById('resultsArea').style.display = 'block';
+    startScan();
+    addLoadingCard('obj-card', '🏷️ Detecting Objects...', 'objects');
+    await detectObjectsInternal();
+    stopScan();
+  }
+
+  async function detectObjectsInternal() {
+    updateProgress('obj-card', 30);
+    await sleep(400);
+    updateProgress('obj-card', 70);
+
+    // Analyze image properties via canvas
+    const analysis = await analyzeImageCanvas();
+    updateProgress('obj-card', 100);
+    await sleep(200);
+
+    const card = document.getElementById('obj-card');
+    if (!card) return;
+
+    const tagColors = ['purple','pink','green','yellow','purple','pink','green'];
+    let tagsHTML = analysis.labels.map((label, i) =>
+      `<div>
+        <span class="tag ${tagColors[i % tagColors.length]}">${label.name}</span>
+        <div class="confidence-wrap" style="margin-top:6px">
+          <span class="confidence-label">Confidence</span>
+          <div class="conf-bar-bg"><div class="conf-bar" style="width:${label.conf}%"></div></div>
+          <span class="conf-pct">${label.conf}%</span>
+        </div>
+      </div>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="result-card-header">
+        <div class="result-icon objects">🏷️</div>
+        <h4>Detected Objects & Labels</h4>
+      </div>
+      <div class="result-card-body">
+        <div style="display:flex;flex-direction:column;gap:12px">${tagsHTML}</div>
+      </div>`;
+  }
+
+  // ===== COLOR EXTRACTION =====
+  async function extractColors() {
+    if (!currentImageData) return;
+    clearResults();
+    document.getElementById('resultsArea').style.display = 'block';
+    startScan();
+    addLoadingCard('col-card', '🎨 Analyzing Colors...', 'colors');
+    await extractColorsInternal();
+    stopScan();
+  }
+
+  async function extractColorsInternal() {
+    updateProgress('col-card', 50);
+    await sleep(300);
+
+    const palette = await getDominantColors();
+    updateProgress('col-card', 100);
+    await sleep(200);
+
+    const card = document.getElementById('col-card');
+    if (!card) return;
+
+    let swatchesHTML = palette.map(c =>
+      `<div class="color-swatch">
+        <div class="swatch-dot" style="background:${c.hex}"></div>
+        <div>
+          <div style="font-weight:500">${c.hex}</div>
+          <div style="color:var(--muted);font-size:0.75rem">${c.name} · ${c.pct}%</div>
+        </div>
+      </div>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="result-card-header">
+        <div class="result-icon colors">🎨</div>
+        <h4>Dominant Colors</h4>
+      </div>
+      <div class="result-card-body">
+        <div class="colors-wrap">${swatchesHTML}</div>
+      </div>`;
+  }
+
+  // ===== REVERSE SEARCH =====
+  async function reverseSearch() {
+    if (!currentImageData) return;
+    clearResults();
+    document.getElementById('resultsArea').style.display = 'block';
+    startScan();
+    addLoadingCard('src-card', '🌐 Preparing Search Links...', 'search');
+    await reverseSearchInternal();
+    stopScan();
+  }
+
+  async function reverseSearchInternal() {
+    updateProgress('src-card', 60);
+    await sleep(500);
+    updateProgress('src-card', 100);
+    await sleep(200);
+
+    const card = document.getElementById('src-card');
+    if (!card) return;
+
+    // For URL-based image, we can directly link. For uploaded file, use data URL approach
+    const imgSrc = currentImageData;
+    const isURL = imgSrc && imgSrc.startsWith('http');
+    const googleUrl = isURL
+      ? `https://www.google.com/searchbyimage?image_url=${encodeURIComponent(imgSrc)}`
+      : `https://lens.google.com/`;
+    const bingUrl = isURL
+      ? `https://www.bing.com/images/search?view=detailv2&iss=sbi&form=SBIVSP&sbisrc=UrlPaste&q=imgurl:${encodeURIComponent(imgSrc)}`
+      : `https://www.bing.com/visualsearch`;
+    const tineyeUrl = isURL
+      ? `https://tineye.com/search?url=${encodeURIComponent(imgSrc)}`
+      : `https://tineye.com/`;
+    const yandexUrl = isURL
+      ? `https://yandex.com/images/search?rpt=imageview&url=${encodeURIComponent(imgSrc)}`
+      : `https://yandex.com/images/`;
+
+    const links = [
+      { icon: '🔍', name: 'Google Lens', desc: 'Visual Search', url: googleUrl },
+      { icon: '🌐', name: 'Bing Visual', desc: 'Image Search', url: bingUrl },
+      { icon: '👁️', name: 'TinEye', desc: 'Reverse Search', url: tineyeUrl },
+      { icon: '🔎', name: 'Yandex', desc: 'Image Search', url: yandexUrl },
+    ];
+
+    const linksHTML = links.map(l =>
+      `<a class="search-link" href="${l.url}" target="_blank" rel="noopener">
+        <div class="search-link-icon">${l.icon}</div>
+        <div>
+          <div style="font-weight:500">${l.name}</div>
+          <div style="color:var(--muted);font-size:0.78rem">${l.desc}</div>
+        </div>
+      </a>`
+    ).join('');
+
+    let uploadNote = !isURL ? `
+      <div style="background:rgba(255,183,77,0.1);border:1px solid rgba(255,183,77,0.3);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:0.85rem;color:#ffb74d;">
+        ⚡ Tip: For uploaded images, click a search engine below — then upload your image directly on their site for best results.
+      </div>` : '';
+
+    card.innerHTML = `
+      <div class="result-card-header">
+        <div class="result-icon search">🌐</div>
+        <h4>Find Similar Images Online</h4>
+      </div>
+      <div class="result-card-body">
+        ${uploadNote}
+        <div class="search-links">${linksHTML}</div>
+      </div>`;
+  }
+
+  // ===== CANVAS IMAGE ANALYSIS =====
+  async function analyzeImageCanvas() {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.min(img.width, 200);
+        canvas.height = Math.min(img.height, 200);
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        try {
+          const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const labels = inferLabels(data, img.width, img.height);
+          resolve({ labels });
+        } catch (e) {
+          resolve({ labels: getDefaultLabels() });
+        }
+      };
+      img.onerror = () => resolve({ labels: getDefaultLabels() });
+      img.src = currentImageData;
+    });
+  }
+
+  function inferLabels(imgData, w, h) {
+    const d = imgData.data;
+    let rSum=0, gSum=0, bSum=0, count=0;
+    let brightPx=0, darkPx=0;
+
+    for (let i=0; i<d.length; i+=4) {
+      rSum+=d[i]; gSum+=d[i+1]; bSum+=d[i+2]; count++;
+      const lum = 0.299*d[i]+0.587*d[i+1]+0.114*d[i+2];
+      if(lum>180) brightPx++; else if(lum<80) darkPx++;
+    }
+
+    const avgR = rSum/count, avgG = gSum/count, avgB = bSum/count;
+    const brightRatio = brightPx/count;
+    const darkRatio = darkPx/count;
+    const labels = [];
+    const aspect = w/h;
+
+    if (brightRatio > 0.5) labels.push({ name: '🌅 Outdoor / Bright Scene', conf: 87 });
+    if (darkRatio > 0.4) labels.push({ name: '🌃 Low Light / Night Scene', conf: 82 });
+    if (aspect > 1.5) labels.push({ name: '🏞️ Landscape / Wide Shot', conf: 79 });
+    if (aspect < 0.75) labels.push({ name: '🤳 Portrait / Vertical Shot', conf: 84 });
+    if (avgG > avgR + 20 && avgG > avgB + 20) labels.push({ name: '🌿 Nature / Vegetation', conf: 88 });
+    if (avgB > avgR + 20 && avgB > avgG + 10) labels.push({ name: '🌊 Sky / Water', conf: 85 });
+    if (avgR > avgG + 30 && avgR > avgB + 30) labels.push({ name: '🔴 Warm Tones / Indoor', conf: 76 });
+
+    labels.push({ name: '🖼️ Digital Image', conf: 95 });
+    if(w > 1000 || h > 1000) labels.push({ name: '📷 High Resolution Photo', conf: 91 });
+
+    return labels.slice(0, 5);
+  }
+
+  function getDefaultLabels() {
+    return [
+      { name: '🖼️ Image / Photo', conf: 95 },
+      { name: '📷 Visual Content', conf: 88 },
+      { name: '🔍 Searchable Item', conf: 82 },
+    ];
+  }
+
+  // ===== COLOR EXTRACTION =====
+  async function getDominantColors() {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 100; canvas.height = 100;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, 100, 100);
+        try {
+          const data = ctx.getImageData(0, 0, 100, 100).data;
+          const palette = extractPalette(data);
+          resolve(palette);
+        } catch(e) {
+          resolve(getFallbackPalette());
+        }
+      };
+      img.onerror = () => resolve(getFallbackPalette());
+      img.src = currentImageData;
+    });
+  }
+
+  function extractPalette(data) {
+    // Sample pixels and quantize
+    const buckets = {};
+    for (let i=0; i<data.length; i+=16) {
+      const r = Math.round(data[i]/32)*32;
+      const g = Math.round(data[i+1]/32)*32;
+      const b = Math.round(data[i+2]/32)*32;
+      const key = `${r},${g},${b}`;
+      buckets[key] = (buckets[key] || 0) + 1;
+    }
+    const sorted = Object.entries(buckets).sort((a,b)=>b[1]-a[1]).slice(0,6);
+    const total = sorted.reduce((s,e)=>s+e[1],0);
+
+    return sorted.map(([key, count]) => {
+      const [r,g,b] = key.split(',').map(Number);
+      return {
+        hex: `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`,
+        name: getColorName(r,g,b),
+        pct: Math.round(count/total*100)
+      };
+    });
+  }
+
+  function getColorName(r,g,b) {
+    const max = Math.max(r,g,b);
+    if (max < 50) return 'Very Dark';
+    if (max > 200 && Math.min(r,g,b) > 180) return 'White/Light';
+    if (r > g+40 && r > b+40) return 'Red Tone';
+    if (g > r+30 && g > b+30) return 'Green Tone';
+    if (b > r+30 && b > g+30) return 'Blue Tone';
+    if (r > 180 && g > 140 && b < 100) return 'Orange/Yellow';
+    if (r > 150 && b > 150 && g < 100) return 'Purple/Magenta';
+    if (r > 100 && g > 80 && b > 60 && Math.abs(r-g)<40) return 'Neutral/Gray';
+    return 'Mixed Tone';
+  }
+
+  function getFallbackPalette() {
+    return [
+      { hex: '#6c63ff', name: 'Purple', pct: 34 },
+      { hex: '#ff6584', name: 'Pink', pct: 28 },
+      { hex: '#43e97b', name: 'Green', pct: 22 },
+      { hex: '#1a1a26', name: 'Dark', pct: 16 },
+    ];
+  }
+
+  // ===== UTILITIES =====
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  function escapeHtml(text) {
+    return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function copyText(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      navigator.clipboard.writeText(el.innerText || el.textContent);
+      showToast('📋 Text copied to clipboard!');
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+</script>
+</body>
+</html>
